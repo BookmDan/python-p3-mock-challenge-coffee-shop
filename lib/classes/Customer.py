@@ -1,6 +1,8 @@
 class Customer:
   def __init__(self, name):
     self.name = name 
+    self._orders =[]
+    self._coffees = [ ]
 
   @property
   def name(self):
@@ -14,10 +16,10 @@ class Customer:
       raise Exception("Name must be a string between 1 and 15 characters ")
     
   def orders(self ):
-    pass
+    return self._orders
 
   def coffees(self):
-    pass
+    return list(set(self._coffees))
 
   def create_order(self, coffee, price):
     pass
