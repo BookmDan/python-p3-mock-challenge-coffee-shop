@@ -23,7 +23,16 @@ class Coffee:
     return list(set(self._customers))
 
   def num_order(self):
-    pass
+    return len(self._orders)
 
   def average_price(self):
-    pass
+    # return sum([order.plrice for order in self._orders]) / len(self._orders)
+  
+    total_price = 0 
+
+    for order in self._orders:
+      # print(order)
+      total_price = total_price + order.price 
+
+    avg = total_price / len(self._orders)
+    return avg 

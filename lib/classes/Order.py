@@ -1,4 +1,5 @@
 class Order: 
+  all = []
   def __init__(self, customer, coffee, price):
     self.customer = customer
     self.coffee = coffee
@@ -10,6 +11,7 @@ class Order:
     self.customer._orders.append(self)
     self.customer._coffees.append(self.coffee)
 
+    Order.all.append(self)
 
 
   @property

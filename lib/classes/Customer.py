@@ -1,8 +1,11 @@
 class Customer:
+  all = []
   def __init__(self, name):
     self.name = name 
     self._orders =[]
     self._coffees = [ ]
+
+    Customer.all.append(self)
 
   @property
   def name(self):
@@ -22,4 +25,23 @@ class Customer:
     return list(set(self._coffees))
 
   def create_order(self, coffee, price):
-    pass
+    from classes.Order import Order
+
+    new_order = Order(self, coffee, price)
+    return new_order
+
+  @classmethod
+  def most_aficionado(cls, coffee):
+    customer_amount_spend = {}
+
+    for customer in cls.all:
+      for order in customer._orders:
+        if order.coffee == coffee:
+          if customer in customer_amount_spend:
+            customer_amount_spend[customer] += order.price 
+          else: 
+            customer_amount_spend[customer] = order.price 
+    if len(customer_amount_spend) == 0:
+      return None 
+    else: 
+      return max(customer_amount_spend, key= customer_amount_spend.get)
